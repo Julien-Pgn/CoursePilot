@@ -1,4 +1,4 @@
-# TAI Labs · Ask API
+# CoursePilot · Ask API
 
 A typed FastAPI endpoint in front of OpenAI. Send a question to `POST /ask` and get back a **structured answer** plus what it cost: tokens, USD and latency. A **guardrail** checks every model output before it reaches you.
 

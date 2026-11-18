@@ -11,7 +11,7 @@ import streamlit as st
 
 MODELS = ["gpt-4.1-nano", "gpt-4o-mini", "gpt-4.1-mini"]  # same allowlist as the API
 
-st.set_page_config(page_title="TAI Labs · Ask", page_icon="🌼")
+st.set_page_config(page_title="CoursePilot · Ask", page_icon="🌼")
 
 with st.sidebar:
     st.header("Settings")

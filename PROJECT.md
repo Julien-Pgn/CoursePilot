@@ -1,4 +1,4 @@
-# TAI Labs — Project Log
+# CoursePilot — Project Log
 
 Living document shared across all coding sessions. **Read this first at the start of a session and update it at the end** (status, decisions, log entry).
 
@@ -8,7 +8,7 @@ Bootcamp **Week 1 assignment: "Ship your first AI endpoint"**. A typed FastAPI `
 ## Constraints
 - **Budget: 10 € total for the whole project** (OpenAI usage). Prefer the cheapest models and short answers, and avoid unnecessary live API calls when testing.
 - Never commit secrets: the OpenAI key lives only in `.env` (git-ignored) and in Render's environment variables. Never print `.env` or paste the key in chat.
-- **The GitHub repo `Julien-Pgn/TAI_Labs_project` is PUBLIC.** Never write the live Render URL in any committed file (README, this file, code). It is submitted privately in Maven only, because anyone with the link can spend the credits.
+- **The GitHub repo `Julien-Pgn/CoursePilot` is PUBLIC.** Never write the live Render URL in any committed file (README, this file, code). It is submitted privately in Maven only, because anyone with the link can spend the credits.
 - CLAUDE.md asks Claude to briefly explain what it does, to teach AI engineering.
 
 ## Assignment checklist
@@ -32,12 +32,14 @@ Bootcamp **Week 1 assignment: "Ship your first AI endpoint"**. A typed FastAPI `
 - User set up a Render service. Not yet checked whether it runs the pushed commit.
 - Local `.env` now uses `OPENAI_MODEL=gpt-4.1-nano`.
 - The 2026-09-30 work is **pushed** (`dc067dc` on GitHub `main`). Render should redeploy from it.
+- **Project renamed to CoursePilot** (2026-11-18): GitHub repo is now `Julien-Pgn/CoursePilot`, local folder `CoursePilot/`. All "TAI Labs" mentions in code/docs replaced; Render service name in `render.yaml` is now `coursepilot-ask`.
+- This new folder has **no `.env` and no `.venv`** yet: recreate them (see How to run → Fresh setup).
 
 ## Stack
 - **Python 3.12** (`.python-version`; managed by `uv`, same version on Render). The venv in `.venv/` was created with `uv venv --seed`.
 - FastAPI 0.142, uvicorn 0.54, openai SDK **3.22**, python-dotenv, Pydantic 2 (pinned in `requirements.txt`)
 - Streamlit 1.64, requests, pytest (in `requirements-dev.txt`, local only)
-- Git: branch `main`, remote `git@github.com:Julien-Pgn/TAI_Labs_project.git` (public)
+- Git: branch `main`, remote `git@github.com:Julien-Pgn/CoursePilot.git` (public)
 
 ## Files
 | File | Purpose |
@@ -47,7 +49,7 @@ Bootcamp **Week 1 assignment: "Ship your first AI endpoint"**. A typed FastAPI `
 | `.streamlit/config.toml` | Streamlit theme (same palette as the chat page), headless, **bound to localhost** |
 | `static/index.html` | Chat UI: a single file with inline CSS/JS and no build step |
 | `test_main.py` | pytest suite. `call_model` is faked; an autouse fixture forbids real OpenAI calls |
-| `render.yaml` | Render Blueprint: free web service `tai-labs-ask`, Frankfurt, health check `/health`, `OPENAI_API_KEY` as a secret (`sync: false`) |
+| `render.yaml` | Render Blueprint: free web service `coursepilot-ask`, Frankfurt, health check `/health`, `OPENAI_API_KEY` as a secret (`sync: false`) |
 | `.python-version` | `3.12` (read by uv and Render) |
 | `requirements.txt` | Server dependencies, pinned (what Render installs) |
 | `requirements-dev.txt` | `-r requirements.txt` + streamlit, requests, pytest |
@@ -105,6 +107,8 @@ Fresh setup: `uv venv && uv pip install -r requirements-dev.txt && cp .env.examp
 - [ ] Submit the URL privately in Maven. Optional LinkedIn post (crop out URLs).
 - [ ] Optional: conversation memory (send prior messages), which would increase token costs.
 
+- [ ] After the rename: recreate `.env` + `.venv` locally; check on Render whether the service follows the new `render.yaml` name (a Blueprint may create a new `coursepilot-ask` service; then delete the old `tai-labs-ask` one and re-enter `OPENAI_API_KEY`), or rename the service in the dashboard.
+
 ## Concepts covered so far (teaching notes)
 - **Route**: a path plus a function (`/`, `/ask`, `/health`, `/docs`). **GET** reads; **POST** sends data.
 - **Structured output**: asking the model for JSON in a fixed schema instead of free text.
@@ -146,3 +150,6 @@ Fresh setup: `uv venv && uv pip install -r requirements-dev.txt && cp .env.examp
 - First real OpenAI call (local, in-process): 200, valid structured answer, 150 tokens, $0.0000285. README updated with this measured cost.
 - Committed and pushed today's work (`dc067dc`).
 
+### 2026-11-18 — Session 4
+- Renamed the project from "TAI Labs" to **CoursePilot** everywhere: page titles (`static/index.html`, Streamlit), FastAPI title and docstring (`main.py`), README heading, `render.yaml` service name (`coursepilot-ask`), and PROJECT.md (title, repo name). The git remote already pointed to `Julien-Pgn/CoursePilot`.
+- Noticed that the folder has no `.env`/`.venv`, so tests were not run (the rename only touches strings, and no test checks them).

@@ -3,7 +3,7 @@
 # Python version comes from .python-version.
 services:
   - type: web
-    name: tai-labs-ask
+    name: coursepilot-ask
     runtime: python
     plan: free
     region: frankfurt

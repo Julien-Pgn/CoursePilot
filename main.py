@@ -1,4 +1,4 @@
-"""TAI Labs: a typed /ask endpoint in front of OpenAI.
+"""CoursePilot: a typed /ask endpoint in front of OpenAI.
 
 Flow of one request:
   1. FastAPI validates the request (question length, allowed model).
@@ -100,7 +100,7 @@ class AskResponse(BaseModel):
     attempts: list[Attempt]
 
 
-app = FastAPI(title="TAI Labs /ask API")
+app = FastAPI(title="CoursePilot /ask API")
 
 _today = {"day": date.today(), "count": 0}
 _today_lock = threading.Lock()
